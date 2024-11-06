@@ -59,3 +59,10 @@ END //
 
 select * from Library_Audit;
 
+INSERT INTO Library (name, price) VALUES ('New Book', 500);
+UPDATE Library SET price = 600 WHERE name = 'SPOS';
+DELETE FROM Library WHERE name = 'DS';
+SELECT * FROM Library_Audit;
+SHOW TRIGGERS;
+
+
