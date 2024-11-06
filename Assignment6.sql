@@ -11,7 +11,7 @@ CREATE TABLE O_EmpId (
     Department VARCHAR(50)
 );
 
--- Insert sample data into N_EmpId (this would be specific to your needs)
+-- Insert sample data into N_EmpId
 INSERT INTO N_EmpId (EmpID, EmpName, Department) VALUES
 (1, 'Alice', 'HR'),
 (2, 'Bob', 'IT'),
@@ -56,9 +56,10 @@ BEGIN
     END LOOP;
 
     CLOSE cur;
-    
-    -- Print completion message
-    SELECT 'Merge completed successfully' AS Message;
+
+    -- Completion message
+    SIGNAL SQLSTATE '01000' SET MESSAGE_TEXT = 'Merge completed successfully';
 END //
 
 DELIMITER ;
+CALL MergeEmployees();
