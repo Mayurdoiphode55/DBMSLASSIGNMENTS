@@ -1,0 +1,104 @@
+//CREATE COLLECTION
+db.createCollection("students");
+
+//Create Operation
+db.students.insertOne({
+  name:"Mansi",
+  dept:"CE",
+  age:19,
+  marks:137,
+  scores:{
+    "mhtcet":99,"jee":93       //Embedded
+  },
+  technologies:["java","python"],   //Array
+});
+
+//Insertmany 
+db.students.insertMany([
+  {
+    name:"Rohan",
+    dept:"IT",
+    age:23,
+    marks:134,
+    scores:{
+      "mhtcet":97,"jee":86
+    },
+    technologies:["java","kotlin"],
+  },
+  {
+    name:"Harshu",
+    dept:"ENTC",
+    age:21,
+    marks:124,
+    scores:{
+      "mhtcet":67,"jee":94
+    },
+    technologies:["java","python"],
+  },
+  {
+    name:"Chinmay",
+    dept:"CE",
+    age:19,
+    marks:155,
+    scores:{
+      "mhtcet":94,"jee":83
+    },
+    technologies:["C++","kotlin"],
+  },
+  {
+    name:"Rohini",
+    dept:"IT",
+    age:18,
+    marks:114,
+    scores:{
+      "mhtcet":87,"jee":68
+    },
+    technologies:["python","java"],
+  },
+])
+
+  //Read operation
+  db.students.find().pretty();
+  db.students.find({ dept:"CE"});
+  db.students.find({ marks: {$gt:120}});
+
+  //Logical Operators
+  //AND operator just separated by comma
+  db.students.find({
+    dept:"IT",
+    age: {$gt:18},
+  })
+  //OR operator
+  db.students.find({
+    $or:[{dept:"CE"},{marks:{$gt:130}}],
+  });
+  
+  //Update
+  db.students.updateOne({name:"Rohini"},{$set:{marks:120}});
+  //Delete
+  db.students.deleteOne({name:"Chinmay"});
+  
+  //Save
+  db.students.save({
+     "_id" : ObjectId("67245c3305db0b5a8703a796"),
+      name:"Mansi",
+      dept:"CE",
+      age:20,
+      marks:137,
+      scores:{
+         "mhtcet":99,"jee":93       //Embedded
+        },
+      technologies:["java","python"],
+  });
+
+//Array and embedded operations
+  db.students.find({
+    "scores.mhtcet": {$gt:90}
+  });
+
+// $size
+db.students.find( {
+    technologies : {
+        $size: 2
+    }
+}) ;

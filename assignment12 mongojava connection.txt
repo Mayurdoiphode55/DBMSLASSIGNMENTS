@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>mjava</groupId>
+  <artifactId>mjava</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <dependencies>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-sync</artifactId>
+            <version>4.9.1</version> <!-- Use the latest version available -->
+        </dependency>
+    </dependencies>
+</project>
+
+
+
+
+
+
+package mongojava;
+
+import com.mongodb.client.MongoClients; // Import the correct class for MongoClients
+import com.mongodb.client.MongoClient; // Import the correct class for MongoClient
+import com.mongodb.client.MongoDatabase; // Import MongoDatabase
+import com.mongodb.client.MongoCollection; // Import MongoCollection
+import org.bson.Document; // Import Document
+
+public class javamongo {
+
+    public static void main(String[] args) {
+        // Create a MongoDB client and connect to the database
+        MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
+
+        // Access the database (replace 'yourDatabase' with your database name)
+        MongoDatabase database = mongoClient.getDatabase("yourDatabase");
+        
+        // Access a collection (replace 'yourCollection' with your collection name)
+        MongoCollection<Document> collection = database.getCollection("yourCollection");
+        
+        System.out.println("Connected to MongoDB and accessed the collection!");
+        
+        // You can now perform operations on the collection, e.g., insert a document
+        Document doc = new Document("name", "mayur")
+                .append("age", 25)
+                .append("gender", "male");
+        
+        collection.insertOne(doc); // Insert the document into the collection
+        
+        System.out.println("Document inserted: " + doc.toString());
+
+        // Close the MongoDB client
+        mongoClient.close();
+    }
+}
