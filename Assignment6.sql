@@ -63,3 +63,4 @@ END //
 
 DELIMITER ;
 CALL MergeEmployees();
+SELECT * FROM O_EmpId;
